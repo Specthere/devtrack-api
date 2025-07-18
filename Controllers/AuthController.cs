@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using devtrack.AppDBContext;
 using Microsoft.EntityFrameworkCore;
-
+using BCrypt.Net;
 
 namespace devtrack.Controllers
 {
@@ -16,21 +16,42 @@ namespace devtrack.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IConfiguration _config;
+        private readonly ILogger<AuthController> _logger;
 
-        public AuthController(AppDbContext context, IConfiguration config)
+        public AuthController(AppDbContext context, IConfiguration config, ILogger<AuthController> logger)
         {
             _context = context;
             _config = config;
+            _logger = logger;
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User login)
+        public async Task<IActionResult> LoginAsync([FromBody] User login)
         {
-            var user = _context.Users.Include(u => u.Role)
-                .FirstOrDefault(u => u.Email == login.Email && u.Password == login.Password);
+            if (login == null ||
+                string.IsNullOrWhiteSpace(login.Email) ||
+                string.IsNullOrWhiteSpace(login.Password))
+            {
+                return BadRequest("Email dan password wajib diisi.");
+            }
 
-            if (user == null)
-                return Unauthorized();
+            var user = await _context.Users
+                             .Include(u => u.Role)
+                             .SingleOrDefaultAsync(u => u.Email == login.Email);
+
+            //if (user == null || !BCrypt.Net.BCrypt.Verify(login.Password, user.Password))
+            //{
+            //    return Unauthorized("Email atau password salah.");
+            //}
+
+            var token = GenerateJwtToken(user);
+            return Ok(new { token, user.Role.RoleName});
+        }
+
+        private string GenerateJwtToken(User user)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
@@ -43,12 +64,11 @@ namespace devtrack.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(2),
-                signingCredentials: new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"])),
-                    SecurityAlgorithms.HmacSha256));
+                signingCredentials: credentials
+            );
 
-            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
+

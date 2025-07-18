@@ -10,6 +10,10 @@ namespace devtrack.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public int RoleId { get; set; }
+        public string Alamat {  get; set; }
+        public string No_hp { get; set; }
+        public string? foto { get; set; }
+        public bool Is_active { get; set; }
         [JsonIgnore]
         public Role? Role { get; set; }
     }

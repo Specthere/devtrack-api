@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "devtrack.Controllers.AuthController",
-    "Method": "Login",
+    "Method": "LoginAsync",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
     "IsController": true,
@@ -16,16 +16,93 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "devtrack.Controllers.ProjectController",
+    "ContainingType": "devtrack.Controllers.MandorProjectController",
+    "Method": "GetAll",
+    "RelativePath": "api/MandorProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[devtrack.Models.MandorProject, devtrack, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "devtrack.Controllers.MandorProjectProjectController",
+    "Method": "GetAll",
+    "RelativePath": "api/MandorProjectProject",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.MandorProjectProjectController",
+    "Method": "GetById",
+    "RelativePath": "api/MandorProjectProject/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.MandorProjectProjectController",
     "Method": "AssignMandor",
-    "RelativePath": "api/Project/assign",
+    "RelativePath": "api/MandorProjectProject/assign",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "assign",
-        "Type": "devtrack.Models.MandorProjectProject",
+        "Name": "mandorProyekId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "projectId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.ProjectController",
+    "Method": "GetAllProjects",
+    "RelativePath": "api/Project",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.ProjectController",
+    "Method": "GetProject",
+    "RelativePath": "api/Project/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -51,7 +128,7 @@
     "ContainingType": "devtrack.Controllers.ProjectController",
     "Method": "DeleteProject",
     "RelativePath": "api/Project/delete/{id}",
-    "HttpMethod": "DELETE",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -195,6 +272,27 @@
   },
   {
     "ContainingType": "devtrack.Controllers.UserManagementController",
+    "Method": "EditMandor",
+    "RelativePath": "api/UserManagement/edit-mandor/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedMandor",
+        "Type": "devtrack.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.UserManagementController",
     "Method": "EditPassword",
     "RelativePath": "api/UserManagement/edit-password",
     "HttpMethod": "PUT",
@@ -204,6 +302,48 @@
       {
         "Name": "model",
         "Type": "devtrack.Controllers.UserManagementController\u002BChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.UserManagementController",
+    "Method": "GetMandor",
+    "RelativePath": "api/UserManagement/mandor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.UserManagementController",
+    "Method": "GetMandorById",
+    "RelativePath": "api/UserManagement/mandor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "devtrack.Controllers.UserManagementController",
+    "Method": "ToogleStatus",
+    "RelativePath": "api/UserManagement/ToggleStatus/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

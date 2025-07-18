@@ -35,9 +35,13 @@ namespace devtrack.AppDBContext
                 entity.Property(u => u.Nama).HasColumnName("nama");
                 entity.Property(u => u.Email).HasColumnName("email");
                 entity.Property(u => u.Password).HasColumnName("password");
-                entity.Property(u => u.RoleId).HasColumnName("role_id");
+                entity.Property(u => u.RoleId).HasColumnName("role");
+                entity.Property(u => u.Alamat).HasColumnName("alamat");
+                entity.Property(u => u.No_hp).HasColumnName("no_hp");
+                entity.Property(u => u.foto).HasColumnName("foto");
+                entity.Property(u => u.Is_active).HasColumnName("is_active");
 
-                // 🔗 Relasi User - Role
+
                 entity.HasOne(u => u.Role)
                       .WithMany()
                       .HasForeignKey(u => u.RoleId);
@@ -49,6 +53,7 @@ namespace devtrack.AppDBContext
                 entity.HasKey(mp => mp.MandorProyekId);
                 entity.Property(mp => mp.MandorProyekId).HasColumnName("mandor_proyek_id");
                 entity.Property(mp => mp.UserId).HasColumnName("user_id");
+                entity.Property(mp => mp.IsWorking).HasColumnName("is_working");
 
                 entity.HasOne(mp => mp.User)
                       .WithMany()
@@ -103,7 +108,7 @@ namespace devtrack.AppDBContext
                 entity.ToTable("mandor_project_project");
                 entity.HasKey(mpp => mpp.Id);
                 entity.Property(mpp => mpp.Id).HasColumnName("id");
-                entity.Property(mpp => mpp.MandorProyekId).HasColumnName("mandor_project_id");
+                entity.Property(mpp => mpp.MandorProyekId).HasColumnName("mandor_proyek_id");
                 entity.Property(mpp => mpp.ProjectId).HasColumnName("project_id");
 
                 entity.HasOne(mpp => mpp.MandorProject)

@@ -1512,11 +1512,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack\\devtrack.csproj",
+      "projectUniqueName": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack-api-main\\devtrack.csproj",
       "projectName": "devtrack",
-      "projectPath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack\\devtrack.csproj",
+      "projectPath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack-api-main\\devtrack.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack\\obj\\",
+      "outputPath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack-api-main\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\NuGetPackages"

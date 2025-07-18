@@ -13,6 +13,27 @@ namespace devtrack.Controllers
         public ProjectController(AppDbContext context) => _context = context;
 
         [Authorize(Roles = "developer")]
+        [HttpGet]
+        public IActionResult GetAllProjects()
+        {
+            var projects = _context.Projects.OrderByDescending(p => p.ProjectId).Where(p => p.Status == "Belum Mulai" || p.Status == "Sedang Berjalan").ToList();
+            return Ok(projects);
+        }
+
+        [Authorize(Roles = "developer")]
+        [HttpGet("{id}")]
+        public IActionResult GetProject(int id)
+        {
+            var project = _context.Projects.SingleOrDefault(p => p.ProjectId == id);
+            if (project == null)
+            {
+                return NotFound(new { message = "Project tidak ditemukan" });
+            }
+            return Ok(project);
+
+        }
+
+        //[Authorize(Roles = "developer")]
         [HttpPost("create")]
         public IActionResult Create([FromBody] Project project)
         {
@@ -22,16 +43,7 @@ namespace devtrack.Controllers
             return Ok(project);
         }
 
-        [Authorize(Roles = "developer")]
-        [HttpPost("assign")]
-        public IActionResult AssignMandor([FromBody] MandorProjectProject assign)
-        {
-            _context.MandorProjectProjects.Add(assign);
-            _context.SaveChanges();
-            return Ok(assign);
-        }
-
-        [Authorize(Roles = "developer")]
+        //[Authorize(Roles = "developer")]
         [HttpPut("edit/{id}")]
         public IActionResult EditProject(int id, [FromBody] Project updatedProject)
         {
@@ -48,13 +60,13 @@ namespace devtrack.Controllers
             return Ok(project);
         }
 
-        [Authorize(Roles = "developer")]
-        [HttpDelete("delete/{id}")]
+        //[Authorize(Roles = "developer")]
+        [HttpPut("delete/{id}")]
         public IActionResult DeleteProject(int id)
         {
             var project = _context.Projects.FirstOrDefault(p => p.ProjectId == id);
             if (project == null) return NotFound();
-            _context.Projects.Remove(project);
+            _context.Projects.Update(project);
             _context.SaveChanges();
             return Ok(new { message = "Project deleted" });
         }

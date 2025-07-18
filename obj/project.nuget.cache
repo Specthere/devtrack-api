@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cBlC0WJ1Kzg=",
+  "dgSpecHash": "97koxzyybZQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack\\devtrack.csproj",
+  "projectFilePath": "C:\\Users\\hp\\source\\repos\\devtrack\\devtrack-api-main\\devtrack.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.16\\microsoft.aspnetcore.authentication.jwtbearer.8.0.16.nupkg.sha512",
